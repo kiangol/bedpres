@@ -3,7 +3,8 @@ Python program that checks ifinavet.no for available space in an event. Sends pu
 
 ## Usage
 
-`bedpres.py` takes event id and refresh rate as input.
+`bedpres.py` takes event id and refresh rate as input. This can be found in the URL of the event, e.g. https://ifinavet.no/event/325
+The event id is **325**
 
 ```bash
 python bedpres.py
