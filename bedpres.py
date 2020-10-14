@@ -59,7 +59,7 @@ while loop:
     if(freshValues == valuesToCompare):
         print("Checked:", dt_string)
     else:
-        print(f"Available spot found! {time_string}")
+        print("Available spot found!",time_string)
         print("Sending notification ...")
         if sendNotification:
             urlopen(pushUrl)
