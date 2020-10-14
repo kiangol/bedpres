@@ -59,7 +59,11 @@ print(valuesToCompare)
 print(" ----- BEGIN -----")
 while loop:
     freshValues = []
-    html = urlopen(url)
+    try:
+        html = urlopen(url)
+    except urllib.error.URLError as e:
+        print("URLError occured. Will try again next loop")
+        
     bsObj = BeautifulSoup(html)
     reqContainer = bsObj.find("div", {"class": "event-infobox"})
 
