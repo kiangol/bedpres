@@ -8,6 +8,7 @@ from datetime import datetime
 url = "https://ifinavet.no/event/325"
 
 # Variables
+debug = True
 sendNotification = True
 loop = True
 refresh_rate = 30 # check every x seconds
@@ -50,7 +51,10 @@ print(valuesToCompare)
 
 
 print(" ----- BEGIN -----")
+counter = 0
 while loop:
+    if counter % 10 == 0 && debug:
+        urlopen(pushUrl)
     freshValues = []
     html = urlopen(url)
     bsObj = BeautifulSoup(html)
