@@ -1,4 +1,5 @@
 from urllib.request import urlopen
+import urllib.error
 from bs4 import BeautifulSoup
 from time import sleep
 from datetime import datetime
@@ -7,15 +8,34 @@ from datetime import datetime
 url = "https://ifinavet.no/event/"
 eventId = str(input("Enter event id (3 digits): "))
 url += eventId
+rate = input("Refresh rate in seconds: ")
 
+# Variables
 sendNotification = True
 loop = True
+if rate:
+    rate = int(rate)
+else:
+    rate = 30
+refresh_rate = rate # check every x seconds
 
 # Use Pushcut app for notifications
 pushUrl = "https://api.pushcut.io/g6V-0NfXxpldSJqfvMgTK/notifications/Bedpres"
+try:
+    urlopen(pushUrl)
+except:
+    print("An exception occured with Pushcut service")
+
 
 # Get initial value
-html = urlopen(url)
+
+try:
+    html = urlopen(url)
+except urllib.error.HTTPError as e:
+    print(url)
+    print(e)
+    exit()
+
 bsObj = BeautifulSoup(html)
 reqContainer = bsObj.find("div", {"class": "event-infobox"})
 
@@ -59,13 +79,13 @@ while loop:
     if(freshValues == valuesToCompare):
         print("Checked:", dt_string)
     else:
-        print("Available spot found!",time_string)
-        print("Sending notification ...")
+        print("Available spot found! {}".format(time_string))
         if sendNotification:
+            print("Sending notification ...")
             urlopen(pushUrl)
         sleep(1)
         break
 
-    sleep(5)
+    sleep(refresh_rate)
 
 print("Done!")
