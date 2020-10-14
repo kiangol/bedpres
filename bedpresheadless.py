@@ -53,7 +53,7 @@ print(valuesToCompare)
 print(" ----- BEGIN -----")
 counter = 0
 while loop:
-    if counter % 10 == 0 && debug:
+    if counter % 10 == 0 and debug:
         urlopen(pushUrl)
     freshValues = []
     html = urlopen(url)
