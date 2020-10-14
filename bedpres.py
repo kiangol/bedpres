@@ -3,6 +3,7 @@ import urllib.error
 from bs4 import BeautifulSoup
 from time import sleep
 from datetime import datetime
+from private import pushUrl
 
 # URL for the event
 url = "https://ifinavet.no/event/"
@@ -20,7 +21,9 @@ else:
 refresh_rate = rate # check every x seconds
 
 # Use Pushcut app for notifications
-pushUrl = "https://api.pushcut.io/g6V-0NfXxpldSJqfvMgTK/notifications/Bedpres"
+# Modify URL to own notification URL 
+# pushUrl = "https://api.pushcut.io/*****/notifications/******"
+
 try:
     urlopen(pushUrl)
 except:
@@ -28,7 +31,6 @@ except:
 
 
 # Get initial value
-
 try:
     html = urlopen(url)
 except urllib.error.HTTPError as e:
@@ -46,7 +48,6 @@ initial = availBox.find("p").contents
 # Store initial value in this list
 valuesToCompare = []
 
-# Used to check for type (add string only)
 lastElement = initial[-1]
 # Add elements from result to comparision list
 print(" ----- INITIAL -----")
