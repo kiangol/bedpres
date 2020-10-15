@@ -62,16 +62,17 @@ while loop:
     freshValues = []
     try:
         html = urlopen(url)
-    except urllib.error.URLError as e:
-        print("URLError occured. Will try again next loop")
+        bsObj = BeautifulSoup(html)
+        reqContainer = bsObj.find("div", {"class": "event-infobox"})
+
+        contents = reqContainer.contents
+        availBox = contents[len(contents)-2]
+
+        curr = availBox.find("p").contents
+    except :
+        print("Error occured. Will try again next loop")
+        continue
         
-    bsObj = BeautifulSoup(html)
-    reqContainer = bsObj.find("div", {"class": "event-infobox"})
-
-    contents = reqContainer.contents
-    availBox = contents[len(contents)-2]
-
-    curr = availBox.find("p").contents
     for i in curr:
         if(type(lastElement) == type(i)):
             freshValues.append(i)
@@ -79,7 +80,7 @@ while loop:
     now = datetime.now()
 
     # dd/mm/YY H:M:S
-    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")   
     time_string = now.strftime("%H:%M:%S")
     if(freshValues == valuesToCompare):
         print("Checked:", dt_string)
