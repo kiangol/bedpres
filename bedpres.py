@@ -38,7 +38,7 @@ except urllib.error.HTTPError as e:
     print(e)
     exit()
 
-bsObj = BeautifulSoup(html)
+bsObj = BeautifulSoup(html, features="html.parser")
 reqContainer = bsObj.find("div", {"class": "event-infobox"})
 
 contents = reqContainer.contents
@@ -62,7 +62,7 @@ while loop:
     freshValues = []
     try:
         html = urlopen(url)
-        bsObj = BeautifulSoup(html)
+        bsObj = BeautifulSoup(html, features="html.parser")
         reqContainer = bsObj.find("div", {"class": "event-infobox"})
 
         contents = reqContainer.contents
