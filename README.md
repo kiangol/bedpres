@@ -14,9 +14,14 @@ python bedpres.py
 ```
 
 To run headless mode, for example on Raspberry Pi, 
-use the `bedpresheadless.py`. Modify event url and refresh rate. Runs without asking for input. 
+use the `bedpresheadless.py`. Modify `event_url` and `refresh_rate`. Runs without asking for input. 
 
 ```bash
 python bedpresheadless.py
  ---- BEGIN ----
+```
+
+To run in background:
+```bash
+nohup python bedpresheadless.py & 
 ```
